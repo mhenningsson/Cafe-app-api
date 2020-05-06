@@ -1,26 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import './App.css';
+import Navigation from './components/layout/navigation'
+import CafeIndex from './components/cafeer/cafeindex'
+import CafeShow from './components/cafeer/cafeshow'
+import CafeCreate from './components/cafeer/cafecreate'
+import CafeEdit from './components/cafeer/cafeedit'
+import NotFound from './components/layout/notfound'
+import OwnerIndex from './components/owners/ownerindex'
+import OwnerShow from './components/owners/ownershow'
+import CategoryIndex from './components/categories/categoryindex'
+import CategoryShow from './components/categories/categoryshow'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends React.Component {
+	render() {
+		return (
+			<BrowserRouter>
+				<div className="App">
+				<Navigation />
+
+				<div className="router">
+					<Switch>
+						<Route exact path='/' component={CafeIndex} />
+						<Route path='/cafeer/create' component={CafeCreate} />
+						<Route path='/cafeer/:id/edit' component={CafeEdit} />
+						<Route path='/cafeer/:id' component={CafeShow} />
+						<Route path='/owners/:id' component={OwnerShow} />
+						<Route path='/owners' component={OwnerIndex} />
+						<Route path='/categories/:id' component={CategoryShow} />
+						<Route path='/categories' component={CategoryIndex} />
+						<Route component={NotFound} />
+					</Switch>
+				</div>
+
+				</div>
+			</BrowserRouter>
+		);
+	}
 }
 
 export default App;
